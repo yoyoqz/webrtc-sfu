@@ -219,6 +219,10 @@ func NewSFU(c Config) *SFU {
 	return sfu
 }
 
+func (s *SFU) GetConfig() WebRTCTransportConfig {
+	return s.webrtc
+}
+
 // NewSession creates a new SessionLocal instance
 func (s *SFU) newSession(id string) Session {
 	session := NewSession(id, s.datachannels, s.webrtc).(*SessionLocal)
