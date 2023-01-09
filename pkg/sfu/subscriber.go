@@ -30,8 +30,12 @@ type Subscriber struct {
 	noAutoSubscribe bool
 }
 
+func (s *Subscriber) SetID(id string) {
+	s.id  = id
+}
+
 // NewSubscriber creates a new Subscriber
-func NewSubscriber(id string, cfg WebRTCTransportConfig) (*Subscriber, error) {
+func NewSubscriber(cfg WebRTCTransportConfig) (*Subscriber, error) {
 	me, err := getSubscriberMediaEngine()
 	if err != nil {
 		Logger.Error(err, "NewPeer error")
@@ -46,7 +50,6 @@ func NewSubscriber(id string, cfg WebRTCTransportConfig) (*Subscriber, error) {
 	}
 
 	s := &Subscriber{
-		id:              id,
 		me:              me,
 		pc:              pc,
 		tracks:          make(map[string][]*DownTrack),

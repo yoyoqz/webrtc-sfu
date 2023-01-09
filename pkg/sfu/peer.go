@@ -83,6 +83,51 @@ func NewPeer(provider SessionProvider) *PeerLocal {
 	}
 }
 
+func (p *PeerLocal) InitSubscribe(cfg WebRTCTransportConfig) error {
+	var err error
+	p.subscriber, err = NewSubscriber(cfg)
+	if err != nil {
+		return fmt.Errorf("error creating transport: %v", err)
+	}
+	//p.subscriber.noAutoSubscribe = conf.NoAutoSubscribe
+	p.subscriber.OnNegotiationNeeded(func() {
+		p.Lock()
+		defer p.Unlock()
+
+		if p.remoteAnswerPending {
+			p.negotiationPending = true
+			return
+		}
+
+		Logger.V(1).Info("Negotiation needed", "peer_id", p.id)
+		offer, err := p.subscriber.CreateOffer()
+		if err != nil {
+			Logger.Error(err, "CreateOffer error")
+			return
+		}
+
+		p.remoteAnswerPending = true
+		if p.OnOffer != nil && !p.closed.get() {
+			Logger.V(0).Info("Send offer", "peer_id", p.id)
+			p.OnOffer(&offer)
+		}
+	})
+
+	p.subscriber.OnICECandidate(func(c *webrtc.ICECandidate) {
+		Logger.V(1).Info("On subscriber ice candidate called for peer", "peer_id", p.id)
+		if c == nil {
+			return
+		}
+
+		if p.OnIceCandidate != nil && !p.closed.get() {
+			json := c.ToJSON()
+			p.OnIceCandidate(&json, subscriber)
+		}
+	})
+
+	return nil
+}
+
 // Join initializes this peer for a given sessionID
 func (p *PeerLocal) Join(sid, uid string, config ...JoinConfig) error {
 	var conf JoinConfig
@@ -103,7 +148,7 @@ func (p *PeerLocal) Join(sid, uid string, config ...JoinConfig) error {
 
 	s, cfg := p.provider.GetSession(sid)
 	p.session = s
-
+/*
 	if !conf.NoSubscribe {
 		p.subscriber, err = NewSubscriber(uid, cfg)
 		if err != nil {
@@ -147,6 +192,7 @@ func (p *PeerLocal) Join(sid, uid string, config ...JoinConfig) error {
 			}
 		})
 	}
+*/
 
 	if !conf.NoPublish {
 		p.publisher, err = NewPublisher(uid, p.session, &cfg)
