@@ -148,6 +148,11 @@ func (p *PeerLocal) Join(sid, uid string, config ...JoinConfig) error {
 
 	s, cfg := p.provider.GetSession(sid)
 	p.session = s
+
+	if !conf.NoSubscribe {
+		p.subscriber.noAutoSubscribe = conf.NoAutoSubscribe
+		p.subscriber.SetID(uid)
+	}
 /*
 	if !conf.NoSubscribe {
 		p.subscriber, err = NewSubscriber(uid, cfg)
