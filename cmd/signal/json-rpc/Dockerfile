@@ -1,14 +1,14 @@
 FROM golang:stretch
 
-WORKDIR $GOPATH/src/github.com/pion/ion-sfu
+WORKDIR $GOPATH/src/github.com/yoyoqz/webrtc-sfu
 
 COPY go.mod go.sum ./
-RUN cd $GOPATH/src/github.com/pion/ion-sfu && go mod download
+RUN cd $GOPATH/src/github.com/yoyoqz/webrtc-sfu && go mod download
 
-COPY pkg/ $GOPATH/src/github.com/pion/ion-sfu/pkg
-COPY cmd/ $GOPATH/src/github.com/pion/ion-sfu/cmd
+COPY pkg/ $GOPATH/src/github.com/yoyoqz/webrtc-sfu/pkg
+COPY cmd/ $GOPATH/src/github.com/yoyoqz/webrtc-sfu/cmd
 
-WORKDIR $GOPATH/src/github.com/pion/ion-sfu/cmd/signal/json-rpc
+WORKDIR $GOPATH/src/github.com/yoyoqz/webrtc-sfu/cmd/signal/json-rpc
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o /sfu .
 
 FROM alpine:3.12.3

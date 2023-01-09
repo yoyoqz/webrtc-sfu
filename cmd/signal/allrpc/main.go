@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/pion/ion-sfu/cmd/signal/allrpc/server"
-	log "github.com/pion/ion-sfu/pkg/logger"
-	"github.com/pion/ion-sfu/pkg/sfu"
+	"github.com/yoyoqz/webrtc-sfu/cmd/signal/allrpc/server"
+	log "github.com/yoyoqz/webrtc-sfu/pkg/logger"
+	"github.com/yoyoqz/webrtc-sfu/pkg/sfu"
 	"github.com/spf13/viper"
 )
 

@@ -10,8 +10,8 @@ import (
 
 	"github.com/go-logr/logr"
 	"github.com/pion/ice/v2"
-	"github.com/pion/ion-sfu/pkg/buffer"
-	"github.com/pion/ion-sfu/pkg/stats"
+	"github.com/yoyoqz/webrtc-sfu/pkg/buffer"
+	"github.com/yoyoqz/webrtc-sfu/pkg/stats"
 	"github.com/pion/turn/v2"
 	"github.com/pion/webrtc/v3"
 )

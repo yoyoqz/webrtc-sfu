@@ -9,11 +9,11 @@ import (
 	_ "net/http/pprof"
 	"os"
 
-	"github.com/pion/ion-sfu/cmd/signal/grpc/server"
-	"github.com/pion/ion-sfu/pkg/middlewares/datachannel"
+	"github.com/yoyoqz/webrtc-sfu/cmd/signal/grpc/server"
+	"github.com/yoyoqz/webrtc-sfu/pkg/middlewares/datachannel"
 
-	log "github.com/pion/ion-sfu/pkg/logger"
-	"github.com/pion/ion-sfu/pkg/sfu"
+	log "github.com/yoyoqz/webrtc-sfu/pkg/logger"
+	"github.com/yoyoqz/webrtc-sfu/pkg/sfu"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"github.com/spf13/viper"
 )

@@ -5,7 +5,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/pion/ion-sfu/pkg/relay"
+	"github.com/yoyoqz/webrtc-sfu/pkg/relay"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 

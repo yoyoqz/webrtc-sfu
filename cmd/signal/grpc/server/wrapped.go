@@ -9,7 +9,7 @@ import (
 	grpc_prometheus "github.com/grpc-ecosystem/go-grpc-prometheus"
 	"github.com/improbable-eng/grpc-web/go/grpcweb"
 	log "github.com/pion/ion-log"
-	"github.com/pion/ion-sfu/pkg/sfu"
+	"github.com/yoyoqz/webrtc-sfu/pkg/sfu"
 	rtc "github.com/pion/ion/proto/rtc"
 	"github.com/soheilhy/cmux"
 	"golang.org/x/sync/errgroup"

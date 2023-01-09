@@ -9,7 +9,7 @@ import (
 
 	"github.com/bep/debounce"
 	log "github.com/pion/ion-log"
-	"github.com/pion/ion-sfu/pkg/sfu"
+	"github.com/yoyoqz/webrtc-sfu/pkg/sfu"
 	rtc "github.com/pion/ion/proto/rtc"
 	"github.com/pion/webrtc/v3"
 	"google.golang.org/grpc/codes"
